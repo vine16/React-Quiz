@@ -19,7 +19,7 @@ export default function FinishScreen({
         <span>{emoji}</span>You Scored <strong>{points}</strong> out of{" "}
         {maxPossiblePoints} ({Math.ceil(percentage)}%)
       </p>
-      <p className="highscore">(HighScore: {highScore} points)</p>
+      <p className="highscore">(HighScore: {Math.round(highScore)}%)</p>
       <button
         className="btn btn-ui"
         onClick={() => dispatch({ type: "restart" })}

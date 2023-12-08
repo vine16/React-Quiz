@@ -1,4 +1,10 @@
-export default function NextButton({ index, numQuestions, dispatch, answer }) {
+export default function NextButton({
+  index,
+  numQuestions,
+  dispatch,
+  answer,
+  maxPossiblePoints,
+}) {
   if (answer === null) return null;
   if (index < numQuestions - 1)
     return (
@@ -14,7 +20,7 @@ export default function NextButton({ index, numQuestions, dispatch, answer }) {
     return (
       <button
         className="btn btn-ui"
-        onClick={() => dispatch({ type: "finish" })}
+        onClick={() => dispatch({ type: "finish", payload: maxPossiblePoints })}
       >
         Finish
       </button>

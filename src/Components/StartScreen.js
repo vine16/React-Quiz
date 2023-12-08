@@ -16,9 +16,11 @@ export default function StartScreen({
         numQuestions={numQuestions}
         maxQuestions={maxQuestions}
       />
+
       <button
         className="btn btn-ui"
         onClick={() => dispatch({ type: "start" })}
+        disabled={selectedNumberOfQuestions < 3}
       >
         Let's Start
       </button>
