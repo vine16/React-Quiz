@@ -10,17 +10,18 @@ import Progress from "./Progress";
 import FinishScreen from "./FinishScreen";
 import Footer from "./Footer";
 import Timer from "./Timer";
+import PrevButton from "./PrevButton";
 
 //1. user can select the number of questions ✅
 //2. add functionality to select difficulty level of questions
 const SECS_PER_QUESTION = 30;
 const initialState = {
   questions: [],
-
+  answers: [],
   //'loading', 'error', 'ready', 'active', 'finished'
   status: "loading",
   index: 0, //current question
-  answer: [],
+  answer: null,
   points: 0,
   highScore: 0,
   secondsRemaining: null,
@@ -52,12 +53,14 @@ function reducer(state, action) {
     case "start":
       return {
         ...state,
+        answer: null,
+        points: 0,
         status: "active",
         secondsRemaining: state.selectedNumberOfQuestions * SECS_PER_QUESTION,
       };
     case "newAnswer":
       const question = state.questions.at(state.index);
-
+      state.answers.push(action.payload); //store the answer given by the user
       return {
         ...state,
         answer: action.payload,
@@ -68,6 +71,12 @@ function reducer(state, action) {
       };
     case "nextQuestion":
       return { ...state, index: state.index + 1, answer: null };
+    case "prevQuestion":
+      return {
+        ...state,
+        index: state.index > 0 ? state.index - 1 : 0,
+        answer: state.index > 0 ? state.answers[state.index - 1] : state.answer, //if ind = 0, just keep the current answer as answer
+      };
     case "finish":
       const newHighScoreFinish = calculateNewHighScore(
         state.points,
@@ -179,6 +188,7 @@ export default function App() {
               question={questions[index]}
               dispatch={dispatch}
               answer={answer}
+              QIndex={index}
             />
             <Footer>
               <Timer
@@ -193,6 +203,7 @@ export default function App() {
                 answer={answer}
                 maxPossiblePoints={maxPossiblePoints}
               />
+              {index > 0 && <PrevButton dispatch={dispatch} />}
             </Footer>
           </>
         )}

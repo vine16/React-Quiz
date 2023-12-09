@@ -19,7 +19,8 @@ export default function NextButton({
   if (index === numQuestions - 1)
     return (
       <button
-        className="btn btn-ui"
+        className="
+        "
         onClick={() => dispatch({ type: "finish", payload: maxPossiblePoints })}
       >
         Finish

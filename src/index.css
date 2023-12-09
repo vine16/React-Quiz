@@ -38,6 +38,7 @@ body {
 
 .main {
   width: 50rem;
+  position: relative;
 }
 
 .app-header {
@@ -128,6 +129,11 @@ progress {
   transition: 0.3s;
 }
 
+.prev-btn {
+  position: absolute;
+  left: 0;
+}
+
 .btn:not([disabled]):hover {
   background-color: var(--color-darkest);
 }
@@ -205,7 +211,9 @@ progress {
 }
 
 .timer {
-  float: left;
+  position: absolute;
+  left: 50%;
+  translate: -50%;
   font-size: 1.8rem;
   color: var(--color-medium);
   border: 2px solid var(--color-dark);

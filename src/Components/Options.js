@@ -1,7 +1,7 @@
 //answer = answered by the user
 //answer == null, initially
-
-export default function Options({ question, dispatch, answer }) {
+//1. store all the answers in answer array
+export default function Options({ QIndex, question, dispatch, answer }) {
   const hasAnswered = answer !== null;
   return (
     <div className="options">
